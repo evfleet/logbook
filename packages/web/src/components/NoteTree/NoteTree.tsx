@@ -1,7 +1,7 @@
 export function NoteTree() {
   return (
-    <div>
+    <aside className="border-r-2">
       <h1>Tree</h1>
-    </div>
+    </aside>
   );
 }

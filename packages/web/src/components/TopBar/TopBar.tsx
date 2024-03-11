@@ -1,7 +1,9 @@
 export function TopBar() {
   return (
-    <div>
-      <h1>TopBar</h1>
+    <div className="border-b-2">
+      <header>
+        <span>Logbook</span>
+      </header>
     </div>
   );
 }

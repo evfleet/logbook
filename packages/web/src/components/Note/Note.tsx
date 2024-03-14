@@ -1,24 +1,30 @@
 import { EditorContent, useEditor } from "@tiptap/react";
 import { Underline } from "@tiptap/extension-underline";
 import { TextAlign } from "@tiptap/extension-text-align";
+import Collaboration from "@tiptap/extension-collaboration";
 import StarterKit from "@tiptap/starter-kit";
+import * as Y from "yjs";
+import { IndexeddbPersistence } from "y-indexeddb";
 import { useState } from "react";
 
 import { Header } from "./Header";
 
-const content = "<h1>Hello World!</h1>";
-
 export type Tag = "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export function Note() {
+  const doc = new Y.Doc();
   const [tag, setTag] = useState<Tag>("h1");
 
+  new IndexeddbPersistence("example-document", doc);
+
   const editor = useEditor({
-    content,
     extensions: [
       StarterKit,
       Underline,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
+      Collaboration.configure({
+        document: doc,
+      }),
     ],
     editorProps: {
       attributes: {

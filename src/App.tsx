@@ -1,11 +1,30 @@
+import {
+	createRootRoute,
+	createRouter,
+	Outlet,
+	RouterProvider,
+} from "@tanstack/react-router";
+
 import "./App.css";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+
+const rootRoute = createRootRoute({
+	component: () => {
+		<>
+			<Outlet />
+			<TanStackRouterDevtools />
+		</>;
+	},
+});
+
+const routeTree = rootRoute.addChildren([]);
+
+const router = createRouter({
+	routeTree,
+});
 
 function App() {
-	return (
-		<div>
-			<h1>Ledger</h1>
-		</div>
-	);
+	return <RouterProvider router={router} />;
 }
 
 export default App;
